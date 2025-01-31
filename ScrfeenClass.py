@@ -2,12 +2,12 @@ import turtle
 
 
 class Scrfeen:
-    def __init__(self, widht, height, title ,background):
+    def __init__(self, width, height, title ,background):
         self.window = turtle.Screen()
         self.window.title(title)
         self.window.bgcolor(background)
 
-        self.window.setup(width=widht, height=height)
+        self.window.setup(width=width, height=height)
         self.window.tracer(0)
 
 
