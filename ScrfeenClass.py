@@ -7,6 +7,9 @@ class Scrfeen:
         self.window.title(title)
         self.window.bgcolor(background)
 
+        self.width = width  # Agregar esta línea
+        self.height = height  # Agregar esta línea
+
         self.window.setup(width=width, height=height)
         self.window.tracer(0)
 
