@@ -99,17 +99,17 @@ class Snake:
             y = self.head.ycor()
             self.segmentos[0].goto(x, y)
 
-    def colision(self, game):
-        for segment in self.segmentos:
-            if self.head.distance(segment) < 20:
-                game.loose = True
-                print("You lose")
-                break
+    def colision(self, game, screen, food):
+        for seg in self.segmentos:
+            if seg.distance(self.head) < 20:
+                game.toDefeat(self, screen, food)
+                
 
 class Game():
     loose = False
     score = 0
     max_score = 0
+    running = True
 
     def __init__(self, delay = 0.2):
         self.delay = delay
@@ -120,7 +120,7 @@ class Game():
         self.texto.speed(0)
         self.texto.color(textColor)
         self.texto.penup()
-        # self.texto.hideturtle()
+        self.texto.hideturtle()
         self.texto.goto(0, 250)
         self.texto.write('Score: 0 Max Score: 0', align='center', font=('times', 24, 'normal'))
 
@@ -135,7 +135,7 @@ class Game():
     def resetScore(self):
         self.score = 0
         self.texto.clear()
-        self.texto('white')
+        self.texto.color('white')
         self.texto.goto(0, 250)
         text_content = 'Score: {} Max Score: {}'.format(self.score, self.max_score)
         self.texto.write( text_content , align='center', font=('times', 24, 'normal'))
@@ -147,20 +147,21 @@ class Game():
         screen.window.update()
         time.sleep(2)
 
-    def toDefeat(self, snake, screen):
+    def toDefeat(self, snake, screen, food):
         self.loose = False
         self.gamerOver(screen)
         snake.head.direction = 'stop'
         snake.head.goto(0, 0)
         for seg in snake.segmentos:
             seg.hideturtle()
-            snake.segmentos.clear()
+        snake.segmentos.clear()
         self.resetScore()
+        food.resetFood()
 
 
-game = Game()
+""" game = Game()
 scrfeen = Scrfeen(600, 600, "Snake Game", "black")
-scrfeen.setArena(400, "red", False)
+scrfeen.setArena(400, "red", True)
 snake = Snake('green', 'white')
 
 snake.controls(scrfeen.window, 'w', 's', 'a', 'd')
@@ -183,4 +184,4 @@ def upload():
 
 upload()
 scrfeen.window.mainloop()
-
+ """
