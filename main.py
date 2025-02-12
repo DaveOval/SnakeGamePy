@@ -5,7 +5,7 @@ from foodClass import Food
 
 import time
 
-game = Game(0.2)
+game = Game(0.1)
 
 game.displayScore('white')
 
