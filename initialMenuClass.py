@@ -61,6 +61,7 @@ class InitialMenu:
         self.move_selector()
         self.window.onkey(self.move_up, 'Up')
         self.window.onkey(self.move_down, 'Down')
+        self.window.onkey(self.change_option, 'Return')
 
     def move_selector(self):
         x = self.buttons[self.current_option].xcor()
@@ -81,4 +82,16 @@ class InitialMenu:
         if self.current_option < len(self.options) - 1:
             self.current_option += 1
             self.move_selector()
+
+    def change_option(self):
+        self.selected_option = self.options[self.current_option]
+        self.window.clear()
+        if self.selected_option.lower() == "start":
+            print("Start game")
+        elif self.selected_option.lower() == "score":
+            print("Score")
+        elif self.selected_option.lower() == "about":
+            print("About")
+        else: 
+            print("Invalid option")
 
